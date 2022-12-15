@@ -1,6 +1,3 @@
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -233,12 +230,9 @@ void* thread_do_work(void* thread_data)
       int bins_per_thread = floor(bin_count/thread_count);
       if (id < (bin_count % thread_count)) 
       {
-         //if there is a bin left over, the early threads take one
          bins_per_thread++;
       }
-      //outer loop is to make sure it gets through all of 
-      //its bin responsibilities
-      // quantity "m" is the new "moving" thread id
+
       for(int m = id; m < bin_count; m += thread_count)
       {
          sum = 0;
@@ -260,8 +254,6 @@ void* thread_do_work(void* thread_data)
          }
          bin_counts[id] = sum;
       }
-      //else, nothing to work on cause all the other threads
-      //are already on it
    }
    return NULL;
 }
