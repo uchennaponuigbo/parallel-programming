@@ -62,12 +62,10 @@ void *List_Work(void * rank)
 {
     long my_rank = (long) rank;
     srand(time(NULL) + my_rank * 100);
-    //int local_tasks = num_tasks / thread_count;
+    //int local_tasks = num_tasks / thread_count; //you could divide the task work, or have every thread do the same number of tasks
     int seed; //rand() % 90;
     int value = 0; //rand() % MAX_MEMBER_VALUE;
     //printf("Thread %ld seed = %d\n", my_rank, seed);
-    //Every thread does the same number of tasks
-    //Ask if he wants us to divide the task work, or have every thread do the same number of tasks
     for(int i = 0; i < num_tasks; i++)
     {
         seed = rand() % 90;
@@ -75,7 +73,6 @@ void *List_Work(void * rank)
         if(seed >= 0 && seed < 30) //[0 - 30)
         {
             printf("Thread %ld Member Task, Value = %d\n", my_rank, value);
-            
             pthread_rwlock_rdlock(&rwlock);
             Member(value);
             pthread_rwlock_unlock(&rwlock);   
@@ -99,7 +96,7 @@ void *List_Work(void * rank)
     return NULL;
 }
 
-bool Member(int value) //, struct node* head
+bool Member(int value)
 {
     struct node* curr = head;
     while(curr != NULL && curr->data < value)
