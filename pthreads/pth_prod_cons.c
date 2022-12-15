@@ -22,13 +22,8 @@ void Get_args(int argc, char* argv[]);
 void Usage(char* prog_name);
 double Serial_pi(long long n);
 
-//https://shivammitra.com/c/producer-consumer-problem-in-c/#
-//https://www.chegg.com/homework-help/questions-and-answers/although-producer-consumer-synchronization-easy-implement-semaphores-s-also-possible-imple-q69943478
-
-
 int main(int argc, char* argv[]) 
 {
-    
     pthread_t producer[5], consumer[5];
     pthread_mutex_init(&mutex, NULL);
    //  sem_init(&empty, 0, BufferSize);
